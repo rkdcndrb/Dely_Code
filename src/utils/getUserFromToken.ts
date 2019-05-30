@@ -3,10 +3,7 @@ import User from "../entities/User";
 
 const getUserFromToken = async (token: string): Promise<User | undefined> => {
   try {
-    const decoded: any = await jwt.verify(
-      token,
-      "MTFCfM5wmTMbrCveV3PVJfKWZVKgfS6F2ZTAw2GY6a6cFZQUYDG"
-    );
+    const decoded: any = await jwt.verify(token, process.env.JWT_TOKEN || "");
     const decodedUser = await User.findOne(decoded.id);
     return decodedUser;
   } catch (err) {

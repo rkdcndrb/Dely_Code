@@ -1,9 +1,6 @@
 import Twilio from "twilio";
 
-const client = Twilio(
-  "AC6186080e9c24b8c8069dd5a18631ccf5",
-  "b146c7856bcc703550bf4c2416230eff"
-);
+const client = Twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 export const sendVerificationText = (phoneNumber: string, code: string) =>
   sendSMS(phoneNumber, `Your verification code is: ${code}`);
@@ -11,7 +8,7 @@ export const sendVerificationText = (phoneNumber: string, code: string) =>
 const sendSMS = (phoneNumber: string, body: string) => {
   return client.messages.create({
     body,
-    from: "+16502412238",
+    from: process.env.TWILIO_PHONE,
     to: phoneNumber
   });
 };

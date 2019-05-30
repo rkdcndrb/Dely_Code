@@ -5,7 +5,7 @@ export const createJWT = (userId: number): string => {
     {
       id: userId
     },
-    "MTFCfM5wmTMbrCveV3PVJfKWZVKgfS6F2ZTAw2GY6a6cFZQUYDG"
+    process.env.JWT_TOKEN || ""
   );
   return token;
 };

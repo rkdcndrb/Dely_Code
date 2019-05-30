@@ -61,19 +61,27 @@ const resolvers: Resolvers = {
               if (status === "CANCELED") {
                 driver.isTaken = false;
                 driver.currentRideId = null;
-                driver.save();
+                await driver.save();
                 passenger.currentRideId = null;
                 passenger.isRiding = false;
-                passenger.save();
+                await passenger.save();
               } else if (status === "ACCEPTED") {
                 const chat = await Chat.create({ ride: updatedRide }).save();
                 passenger.currentRideId = updatedRide.id;
                 passenger.chat = chat;
-                passenger.save();
+                await passenger.save();
                 driver.isTaken = true;
                 driver.currentRideId = updatedRide.id;
                 driver.chat = chat;
-                driver.save();
+                await driver.save();
+              }
+              if (status === "FINISHED") {
+                driver.isTaken = false;
+                driver.currentRideId = null;
+                await driver.save();
+                passenger.isRiding = false;
+                passenger.currentRideId = null;
+                await passenger.save();
               }
               return {
                 ok: true,
