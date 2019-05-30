@@ -1,0 +1,21 @@
+type UpdateUserResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type Mutation {
+  updateUser(
+    email: String
+    firstName: String
+    lastName: String
+    password: String
+    age: Int
+    phoneNumber: String
+    profilePhoto: String
+    isDriving: Boolean
+    lastLat: Float
+    lastLng: Float
+    lastOrientation: Float
+  ): UpdateUserResponse!
+}

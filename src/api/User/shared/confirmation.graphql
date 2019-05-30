@@ -1,0 +1,10 @@
+type Confirmation {
+  id: Int!
+  userId: Int!
+  user: User!
+  sent: Boolean!
+  key: String!
+  type: String!
+  createdAt: String!
+  updatedAt: String!
+}

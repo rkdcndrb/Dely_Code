@@ -1,0 +1,19 @@
+type RequestRideResponse {
+  ok: Boolean!
+  ride: Ride
+  error: String
+}
+
+type Mutation {
+  requestRide(
+    pickUpLocation: String!
+    dropOffLocation: String!
+    pickUpLat: Float!
+    pickUpLng: Float!
+    dropOffLat: Float!
+    dropOffLng: Float!
+    price: Float!
+    distance: String!
+    duration: String!
+  ): RequestRideResponse!
+}

@@ -1,0 +1,5 @@
+type Chat {
+  id: Int!
+  participants: [User]
+  messages: [Message]
+}

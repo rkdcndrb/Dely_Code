@@ -1,0 +1,12 @@
+type CompletePhoneSignInResponse {
+  ok: Boolean!
+  token: String
+  error: String
+}
+
+type Mutation {
+  completePhoneSignIn(
+    key: String!
+    phone: String!
+  ): CompletePhoneSignInResponse!
+}

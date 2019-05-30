@@ -1,0 +1,15 @@
+type AddPlaceResponse {
+  ok: Boolean!
+  place: Place
+  error: String
+}
+
+type Mutation {
+  addPlace(
+    address: String!
+    name: String!
+    lat: Float!
+    lng: Float!
+    fav: Boolean
+  ): AddPlaceResponse!
+}

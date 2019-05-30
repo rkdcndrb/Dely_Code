@@ -1,0 +1,291 @@
+type Subscription {
+  newMessage: Message
+  rideRequest: Ride
+  rideUpdate: Ride
+  getDriver: User
+}
+
+type GetChatResponse {
+  ok: Boolean!
+  chat: Chat
+  error: String
+}
+
+type Query {
+  getChat(rideId: Int!): GetChatResponse!
+  getPlace(placeId: Int!): GetPlaceResponse!
+  getPlaces: GetPlacesResponse!
+  getRide(rideId: Int): GetRideResponse!
+  getRideHistory: GetRideHistoryResponse!
+  getRideRequest: GetRideRequestResponse!
+  getDrivers: GetDriversResponse!
+  getUserProfile(id: Int!): GetUserProfileResponse!
+  getUsers: GetUsersResponse!
+  me: MeResponse
+}
+
+type SendMessageResponse {
+  ok: Boolean!
+  error: String
+  message: Message
+}
+
+type Mutation {
+  sendMessage(message: String!): SendMessageResponse!
+  signS3URL(fileName: String!, fileType: String!): SignS3URLResponse!
+  addPlace(address: String!, name: String!, lat: Float!, lng: Float!, fav: Boolean): AddPlaceResponse!
+  deletePlace(placeId: Int!): DeletePlaceResponse!
+  editPlace(placeId: Int!, name: String, latlong: String, address: String, fav: Boolean): EditPlaceResponse!
+  requestRide(pickUpLocation: String!, dropOffLocation: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!
+  updateRide(rideId: Int!, status: String, driverRating: Float, passengerRating: Float, driverId: Int): UpdateRideResponse!
+  addPhone(phoneNumber: String!): AddPhoneResponse!
+  completePhoneSignIn(key: String!, phone: String!): CompletePhoneSignInResponse!
+  emailSignIn(email: String!, password: String!): EmailSignInResponse!
+  emailSignUp(phoneNumber: String!, email: String!, firstName: String!, lastName: String!, password: String!, age: Int!, profilePhoto: String!): EmailSignUpResponse!
+  facebookConnect(email: String, firstName: String!, lastName: String!, userID: String!): FacebookConnectResponse!
+  requestPasswordReset: RequestPasswordResetResponse!
+  requestPhoneSignIn(phoneNumber: String!): RequestPhoneSignInResponse!
+  resetPassword(key: String!, newPassword: String!): ResetPasswordResponse!
+  updateUser(email: String, firstName: String, lastName: String, password: String, age: Int, phoneNumber: String, profilePhoto: String, isDriving: Boolean, lastLat: Float, lastLng: Float, lastOrientation: Float): UpdateUserResponse!
+  verifyEmail(key: String!): VerifyEmailResponse!
+  verifyPhone(key: String!): VerifyPhoneResponse!
+}
+
+type Chat {
+  id: Int!
+  participants: [User]
+  messages: [Message]
+}
+
+type Message {
+  user: User
+  message: String
+  userId: Int
+  chatId: Int
+  id: Int!
+}
+
+type SignS3URLResponse {
+  ok: Boolean!
+  signedUrl: String
+  fileUrl: String
+  error: String
+}
+
+type AddPlaceResponse {
+  ok: Boolean!
+  place: Place
+  error: String
+}
+
+type DeletePlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditPlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetPlaceResponse {
+  ok: Boolean!
+  place: Place
+  error: String
+}
+
+type GetPlacesResponse {
+  ok: Boolean!
+  places: [Place]
+  error: String
+}
+
+type Place {
+  id: Int!
+  name: String!
+  lat: Float!
+  lng: Float!
+  address: String!
+  fav: Boolean!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type GetRideResponse {
+  ok: Boolean!
+  ride: Ride
+  isDriver: Boolean
+  error: String
+}
+
+type GetRideHistoryResponse {
+  ok: Boolean!
+  rides: [Ride]
+  error: String
+}
+
+type GetRideRequestResponse {
+  ok: Boolean!
+  error: String
+  ride: Ride
+}
+
+type RequestRideResponse {
+  ok: Boolean!
+  ride: Ride
+  error: String
+}
+
+type Ride {
+  id: Int!
+  status: String!
+  driverRating: Float
+  passengerRating: Float
+  passenger: User!
+  driver: User
+  pickUpLocation: String!
+  dropOffLocation: String!
+  pickUpLat: Float!
+  pickUpLng: Float!
+  dropOffLng: Float!
+  dropOffLat: Float!
+  price: Float
+  paymentMethod: String!
+  createdAt: String!
+  updatedAt: String!
+  distance: String!
+  duration: String!
+}
+
+type UpdateRideResponse {
+  ok: Boolean!
+  ride: Ride
+  error: String
+}
+
+type AddPhoneResponse {
+  ok: Boolean!
+  error: String
+}
+
+type CompletePhoneSignInResponse {
+  ok: Boolean!
+  token: String
+  error: String
+}
+
+type EmailSignInResponse {
+  ok: Boolean!
+  token: String
+  error: String
+  user: User
+}
+
+type EmailSignUpResponse {
+  ok: Boolean!
+  token: String
+  error: String
+}
+
+type FacebookConnectResponse {
+  ok: Boolean!
+  token: String
+  error: String
+  user: User
+}
+
+type GetDriversResponse {
+  drivers: [User]
+}
+
+type GetUserProfileResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type GetUsersResponse {
+  ok: Boolean!
+  users: [User]!
+  error: String
+}
+
+type MeResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type RequestPasswordResetResponse {
+  ok: Boolean!
+  error: String
+}
+
+type RequestPhoneSignInResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ResetPasswordResponse {
+  ok: Boolean
+  error: String
+}
+
+type Confirmation {
+  id: Int!
+  userId: Int!
+  user: User!
+  sent: Boolean!
+  key: String!
+  type: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type User {
+  id: Int!
+  email: String
+  facebookId: String
+  firstName: String
+  lastName: String
+  age: Int
+  password: String
+  verifiedEmail: Boolean
+  loginType: String!
+  phoneNumber: String
+  verifiedPhoneNumber: Boolean
+  profilePhoto: String
+  createdAt: String
+  updatedAt: String
+  fullName: String
+  confirmations: [Confirmation]
+  isDriving: Boolean
+  balance: Float
+  carPlates: String
+  ridesAsPassenger: [Ride]!
+  ridesAsDriver: [Ride]!
+  places: [Place]
+  lastLat: Float
+  lastLng: Float
+  isTaken: Boolean
+  isRiding: Boolean
+  lastOrientation: Float
+  currentRideId: Int
+}
+
+type UpdateUserResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type VerifyEmailResponse {
+  ok: Boolean!
+  error: String
+}
+
+type VerifyPhoneResponse {
+  ok: Boolean!
+  error: String
+}
