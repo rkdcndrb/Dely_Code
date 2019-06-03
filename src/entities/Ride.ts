@@ -43,7 +43,7 @@ class Ride extends BaseEntity {
   @ManyToOne(type => User, user => user.ridesAsDriver)
   driver: User;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   pickUpLocation: string;
 
   @Column({ type: "double precision", nullable: true })
@@ -58,10 +58,10 @@ class Ride extends BaseEntity {
   @Column({ type: "double precision", nullable: true })
   dropOffLat: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   dropOffLocation: string;
 
-  @Column({ type: "decimal" })
+  @Column({ type: "decimal", nullable: true })
   price: number;
 
   @Column({ type: "text", nullable: true })

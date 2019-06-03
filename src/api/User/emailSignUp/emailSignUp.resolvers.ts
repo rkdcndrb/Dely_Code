@@ -13,6 +13,7 @@ interface IArgs {
   age: number;
   phoneNumber: string;
   profilePhoto: string;
+  major: string;
 }
 
 const resolvers: Resolvers = {

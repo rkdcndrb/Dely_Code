@@ -45,6 +45,9 @@ class User extends BaseEntity {
   @Column({ type: "text", nullable: true })
   password: string;
 
+  @Column({ type: "text", nullable: true })
+  major: string;
+
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
 
@@ -63,7 +66,7 @@ class User extends BaseEntity {
   @Column({ type: "boolean", default: false })
   isDriving: boolean;
 
-  @Column({ type: "double precision", nullable: true })
+  @Column({ type: "double precision", default: 0 })
   balance: number;
 
   @Column({ type: "text", default: "" })
@@ -114,7 +117,7 @@ class User extends BaseEntity {
   @UpdateDateColumn() updatedAt: string;
 
   get fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
+    return `${this.lastName} ${this.firstName}`;
   }
 
   hashPassword(password: string = ""): Promise<string> {

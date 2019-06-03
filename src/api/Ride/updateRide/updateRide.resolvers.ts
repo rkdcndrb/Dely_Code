@@ -40,6 +40,7 @@ const resolvers: Resolvers = {
           rideId,
           driverId
         } = args;
+        console.log(args);
         const updateData: any = { status, driverRating, passengerRating };
         if (driverId) {
           const driver: User | undefined = await User.findOne(driverId);
@@ -78,6 +79,7 @@ const resolvers: Resolvers = {
               if (status === "FINISHED") {
                 driver.isTaken = false;
                 driver.currentRideId = null;
+                driver.balance = driver.balance + Number(ride.price);
                 await driver.save();
                 passenger.isRiding = false;
                 passenger.currentRideId = null;
