@@ -12,6 +12,7 @@ interface IArgs {
   driverRating: number;
   passengerRating: number;
   driverId: number;
+  canceledBy: number;
 }
 
 const resolvers: Resolvers = {
@@ -38,10 +39,16 @@ const resolvers: Resolvers = {
           driverRating,
           passengerRating,
           rideId,
-          driverId
+          driverId,
+          canceledBy
         } = args;
         console.log(args);
-        const updateData: any = { status, driverRating, passengerRating };
+        const updateData: any = {
+          status,
+          driverRating,
+          passengerRating,
+          canceledBy
+        };
         if (driverId) {
           const driver: User | undefined = await User.findOne(driverId);
           if (driver) {
@@ -60,9 +67,11 @@ const resolvers: Resolvers = {
               const driver: User = updatedRide.driver;
               const passenger: User = updatedRide.passenger;
               if (status === "CANCELED") {
-                driver.isTaken = false;
-                driver.currentRideId = null;
-                await driver.save();
+                if (driver) {
+                  driver.isTaken = false;
+                  driver.currentRideId = null;
+                  await driver.save();
+                }
                 passenger.currentRideId = null;
                 passenger.isRiding = false;
                 await passenger.save();

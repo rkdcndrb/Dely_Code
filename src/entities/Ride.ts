@@ -64,6 +64,9 @@ class Ride extends BaseEntity {
   @Column({ type: "decimal", nullable: true })
   price: number;
 
+  @Column({ type: "int", nullable: true })
+  canceledBy: number;
+
   @Column({ type: "text", nullable: true })
   distance: string;
 

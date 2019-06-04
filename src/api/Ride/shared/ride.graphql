@@ -17,4 +17,5 @@ type Ride {
   updatedAt: String!
   distance: String!
   duration: String!
+  canceledBy: Int
 }

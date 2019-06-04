@@ -11,5 +11,6 @@ type Mutation {
     driverRating: Float
     passengerRating: Float
     driverId: Int
+    canceledBy: Int
   ): UpdateRideResponse!
 }
