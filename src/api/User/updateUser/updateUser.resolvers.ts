@@ -12,6 +12,7 @@ interface IArgs {
   age: number;
   phoneNumber: string;
   profilePhoto: string;
+  major: string;
   isDriving: boolean;
   lastLat: number;
   lastLng: number;

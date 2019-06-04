@@ -13,6 +13,7 @@ type Mutation {
     age: Int
     phoneNumber: String
     profilePhoto: String
+    major: String
     isDriving: Boolean
     lastLat: Float
     lastLng: Float
