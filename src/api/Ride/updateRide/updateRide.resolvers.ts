@@ -74,11 +74,13 @@ const resolvers: Resolvers = {
                 }
                 passenger.currentRideId = null;
                 passenger.isRiding = false;
+                passenger.isTaken = false;
                 await passenger.save();
               } else if (status === "ACCEPTED") {
                 const chat = await Chat.create({ ride: updatedRide }).save();
                 passenger.currentRideId = updatedRide.id;
                 passenger.chat = chat;
+                passenger.isTaken = true;
                 await passenger.save();
                 driver.isTaken = true;
                 driver.currentRideId = updatedRide.id;
@@ -90,6 +92,7 @@ const resolvers: Resolvers = {
                 driver.currentRideId = null;
                 driver.balance = driver.balance + Number(ride.price);
                 await driver.save();
+                passenger.isTaken = false;
                 passenger.isRiding = false;
                 passenger.currentRideId = null;
                 await passenger.save();
