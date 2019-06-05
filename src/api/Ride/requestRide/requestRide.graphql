@@ -15,5 +15,6 @@ type Mutation {
     price: Float!
     distance: String!
     duration: String!
+    product: String!
   ): RequestRideResponse!
 }

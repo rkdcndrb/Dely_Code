@@ -14,6 +14,7 @@ interface IArgs {
   price: number;
   distance: string;
   duration: string;
+  product: string;
 }
 
 const resolvers: Resolvers = {

@@ -73,6 +73,9 @@ class Ride extends BaseEntity {
   @Column({ type: "text", nullable: true })
   duration: string;
 
+  @Column({ type: "text", nullable: true })
+  product: string;
+
   @Column({ type: "text", enum: [CASH, CARD], default: CASH })
   paymentMethod: string;
 

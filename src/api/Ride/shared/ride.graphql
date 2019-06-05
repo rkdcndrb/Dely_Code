@@ -18,4 +18,5 @@ type Ride {
   distance: String!
   duration: String!
   canceledBy: Int
+  product: String
 }
