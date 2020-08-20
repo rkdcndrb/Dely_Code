@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.259.1",
-    "bcrypt": "^2.0.1",
+    "bcrypt": "^5.0.0",
     "class-validator": "^0.8.5",
     "dotenv": "^8.0.0",
     "graphql": "^0.13.2",
